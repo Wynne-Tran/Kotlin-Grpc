@@ -1,4 +1,4 @@
-# Multiple Platforms Kotlin & Grpc server
+# Multiple Platforms Kotlin & gRPC server
 
 [android.webm](https://user-images.githubusercontent.com/63073395/178321383-d5f35323-b6a9-42d1-9fc1-7d9fd23edbed.webm)
 
@@ -24,3 +24,8 @@ PART 2 (coming soon...)
 
 - Go to server folder, run HelloWorldServer first, it will run port 8080
 - Change to androidApp, run android client.
+
+## How to build this project ?
+Here is step-by-step
+
+https://medium.com/@WynneTran/quick-start-microservices-kotlin-grpc-2c4e4f94483a
