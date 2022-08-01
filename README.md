@@ -8,8 +8,15 @@ https://user-images.githubusercontent.com/63073395/182060814-12d6c197-afb0-474c-
 
 ## Overview
 
+PART 1 (master branch)
+
 - Grpc server
 - Android Client
+
+PART 2 (coming soon...)
+
+- Grpc multiple servers in the same project
+- iOS Client
 
 
 ## Usage
