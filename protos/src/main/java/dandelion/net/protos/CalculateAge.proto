@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "dandelion.net.protos";
+option java_outer_classname = "CalculateAgeService";
+
+service CalculateAge {
+  rpc CalculateAge (BirthYearRequest) returns (AgeReply) {}
+}
+
+message BirthYearRequest {
+  int32 birthYear = 1;
+}
+
+message AgeReply {
+  string message = 1;
+  int32 age = 2;
+}

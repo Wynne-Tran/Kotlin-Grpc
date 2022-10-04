@@ -39,8 +39,17 @@ class HelloServer(private val port: Int) {
             1
         ).asCoroutineDispatcher()) {
         override suspend fun sayHello(request: HelloRequest) : HelloReply {
+            var response = 0
+            var message = ""
+            try {
+                response = 2022 - request.name.toInt();
+                message = response.toString()
+            }
+            catch (_: NumberFormatException){
+                message = "Please input a number !"
+            }
             return HelloReply.newBuilder()
-                .setMessage("Hello " + request.name)
+                .setMessage("Your age is: $message")
                 .build()
         }
     }

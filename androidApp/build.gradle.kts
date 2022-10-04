@@ -40,7 +40,9 @@ android {
             resValue("string", "server_url", serverUrl!!)
         } else {
             resValue("string", "server_url", "http://10.0.2.2:8080/")
+            resValue("string", "server_url", "http://10.0.2.2:8089/")
         }
+
 
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 
