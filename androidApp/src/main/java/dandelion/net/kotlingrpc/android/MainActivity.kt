@@ -3,20 +3,38 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
 import dandelion.net.kotlingrpc.GreeterRCP
 import dandelion.net.kotlingrpc.Greeting
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
     private val uri by lazy { Uri.parse("http://10.0.2.2:8080") }
-    private val greeterService by lazy { GreeterRCP(uri) }
+    private val greeterService by lazy { Greeting().android(uri) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Surface(color = MaterialTheme.colors.background) {
-                Greeting().Greeter(greeterService)
+                Greeter(greeterService)
             }
         }
     }
@@ -42,6 +60,7 @@ class MainActivity : AppCompatActivity() {
 //
 //
 //    private val greeter = GreeterGrpcKt.GreeterCoroutineStub(channel)
+//
 //    suspend fun sayHello(name: String) {
 //        try {
 //            val request = HelloRequest.newBuilder().setName(name).build()
@@ -56,20 +75,21 @@ class MainActivity : AppCompatActivity() {
 //        channel.shutdownNow()
 //    }
 //}
-//
-//@Composable
-//fun Greeter(greeterRCP: GreeterRCP) {
-//    val scope = rememberCoroutineScope()
-//    val nameState = remember { mutableStateOf(TextFieldValue()) }
-//    Column(Modifier.fillMaxWidth().fillMaxHeight(), Arrangement.Top, Alignment.CenterHorizontally) {
-//        Text(stringResource(R.string.name_hint), modifier = Modifier.padding(top = 10.dp))
-//        OutlinedTextField(nameState.value, { nameState.value = it })
-//        Button({ scope.launch { greeterRCP.sayHello(nameState.value.text) } }, Modifier.padding(10.dp)) {
-//            Text(stringResource(R.string.send_request))
-//        }
-//        if (greeterRCP.responseState.value.isNotEmpty()) {
-//            Text(stringResource(R.string.server_response), modifier = Modifier.padding(top = 10.dp))
-//            Text(greeterRCP.responseState.value)
-//        }
-//    }
-//}
+
+
+@Composable
+fun Greeter(greeterRCP: GreeterRCP) {
+    val scope = rememberCoroutineScope()
+    val nameState = remember { mutableStateOf(TextFieldValue()) }
+    Column(Modifier.fillMaxWidth().fillMaxHeight(), Arrangement.Top, Alignment.CenterHorizontally) {
+        Text(stringResource(R.string.name_hint), modifier = Modifier.padding(top = 10.dp))
+        OutlinedTextField(nameState.value, { nameState.value = it })
+        Button({ scope.launch { greeterRCP.sayHello(nameState.value.text) } }, Modifier.padding(10.dp)) {
+            Text(stringResource(R.string.send_request))
+        }
+        if (greeterRCP.responseState.value.isNotEmpty()) {
+            Text(stringResource(R.string.server_response), modifier = Modifier.padding(top = 10.dp))
+            Text(greeterRCP.responseState.value)
+        }
+    }
+}
