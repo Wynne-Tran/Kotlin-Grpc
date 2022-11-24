@@ -1,4 +1,4 @@
-package dandelion.net.kotlingrpc
+package dandelion.net.kotlingrpc.android
 
 import android.net.Uri
 import androidx.compose.runtime.mutableStateOf

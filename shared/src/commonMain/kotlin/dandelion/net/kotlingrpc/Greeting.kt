@@ -1,11 +1,7 @@
-package dandelion.net.kotlingrpc
-import android.net.Uri
+import dandelion.net.kotlingrpc.Platform
 
 class Greeting {
-    fun android(uri: Uri): GreeterRCP {
-        return GreeterRCP(uri);
-    }
     fun greeting(): String {
-        return "Hello, IOS!"
+        return "Hello, ${Platform().platform}!"
     }
 }

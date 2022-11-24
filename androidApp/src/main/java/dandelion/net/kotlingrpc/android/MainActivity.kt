@@ -22,18 +22,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import dandelion.net.kotlingrpc.GreeterRCP
-import dandelion.net.kotlingrpc.Greeting
 import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
     private val uri by lazy { Uri.parse("http://10.0.2.2:8080") }
-    private val greeterService by lazy { Greeting().android(uri) }
+    private val greeterService by lazy { GreeterRCP(uri)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Surface(color = MaterialTheme.colors.background) {
+
                 Greeter(greeterService)
             }
         }
@@ -43,38 +42,6 @@ class MainActivity : AppCompatActivity() {
         greeterService.close()
     }
 }
-//
-//class GreeterRCP(uri: Uri) : Closeable {
-//    val responseState = mutableStateOf("")
-//
-//    private val channel = let {
-//        println("Connecting to ${uri.host}:${uri.port}")
-//        val builder = ManagedChannelBuilder.forAddress(uri.host, uri.port)
-//        if (uri.scheme == "https") {
-//            builder.useTransportSecurity()
-//        } else {
-//            builder.usePlaintext()
-//        }
-//        builder.executor(Dispatchers.IO.asExecutor()).build()
-//    }
-//
-//
-//    private val greeter = GreeterGrpcKt.GreeterCoroutineStub(channel)
-//
-//    suspend fun sayHello(name: String) {
-//        try {
-//            val request = HelloRequest.newBuilder().setName(name).build()
-//            val response = greeter.sayHello(request)
-//            responseState.value = response.message
-//        } catch (e: Exception) {
-//            responseState.value = e.message ?: "Unknown Error"
-//            e.printStackTrace()
-//        }
-//    }
-//    override fun close() {
-//        channel.shutdownNow()
-//    }
-//}
 
 
 @Composable
