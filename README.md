@@ -13,10 +13,16 @@ PART 1 (master branch)
 - Grpc server
 - Android Client
 
-PART 2 (coming soon...)
 
-- Grpc multiple servers in the same project
-- iOS Client
+PART 2
+
+- Grpc multiple servers in the same project (MultiService-Android branch)
+- iOS Client / whole app (Grpc-iOS branch)
+
+
+https://user-images.githubusercontent.com/63073395/205472800-15705826-01e6-49e0-8732-415307c4a3df.mp4
+
+
 
 
 ## Usage
@@ -28,4 +34,8 @@ PART 2 (coming soon...)
 ## How to build this project ?
 Here is step-by-step
 
+PART 1:
 https://medium.com/@WynneTran/quick-start-microservices-kotlin-grpc-2c4e4f94483a
+
+PART 2:
+https://medium.com/@WynneTran/build-microservices-with-kotlin-and-grpc-server-ea483a9eedb5
